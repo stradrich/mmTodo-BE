@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "psql-test": "psql -h aws-0-ap-southeast-1.pooler.supabase.com -p 6543 -d postgres -U postgres.kczbkbczlzoqrmqxfant"
     },
     "devDependencies": {
         "axios": "^1.1.2",

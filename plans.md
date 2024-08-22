@@ -212,4 +212,13 @@ SELECT * FROM users;
 
 ```
 create fake data for development using seeders (reflect model and migration table)
+
+// run spefic seeder
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed --class=TasksTableSeeder
+php artisan db:seed --class=CategoriesTableSeeder
+
+// run all seeders
+php artisan db:seed
+
 ```

@@ -13,16 +13,16 @@ class TaskTableSeeder extends Seeder
             'title' => 'test',
             'description' => 'test',
             'status' => 'incomplete',
-            'priority' => 'low',
             'due_date' => now()->addDays(1),
+            'priority' => 'low',
         ]);
 
         Task::create([
             'title' => 'test1',
             'description' => 'test1',
             'status' => 'complete',
-            'priority' => 'mid',
             'due_date' => now()->addDays(2),
+            'priority' => 'mid',
         ]);
 
         Task::create([

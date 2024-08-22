@@ -78,7 +78,7 @@ php artisan make:migration create_users_table # ???
 ```
 php artisan make:model Task ✅
 php artisan make:model Category ✅
-php artisan make:model UserTask
+php artisan make:model User (automatically generated, not sure why) ✅
 
 Task is used for managing individual tasks and their attributes, while UserTask is used to manage the relationships between users and tasks, especially in cases where tasks might be associated with multiple users or have specific roles or permissions.
 
@@ -127,13 +127,42 @@ SELECT * FROM tasks;
 SELECT * FROM categories;
 SELECT * FROM user_task;
 
-### TINKER QUERY ###
+### TINKER QUERY ### (add task via tinker)
 
 php artisan tinker
 
 examples:
 $task = \App\Models\Task::find(1);
 $category = \App\Models\Category::all();
+
+```
+
+# Tinker push data into Supabase
+
+```
+// TASK ✅
+use App\Models\Task;
+
+$task = Task::create([
+    'title' => 'tinker test',
+    'description' => 'tinker test',
+    'status' => 'complete',
+    'priority' => 'low',
+    'due_date' => now(),
+]);
+
+$task;
+
+// USER ✅
+use App\Models\User;
+
+$user = User::create([
+     'name' => 'test',
+     'email' => 'test@gmail',
+     'password' => 'sigma123',
+]);
+
+$user;
 
 ```
 
@@ -164,4 +193,23 @@ WHERE datname = 'todoApp-BE'
   AND pid <> pg_backend_pid();
 
 
+### TERMINAL PEEK SUPABASE ###
+psql "host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres user=postgres.acvjeoqaldhqpmndncjy password=xxx* sslmode=disable"
+
+TO SEE DATA STRUCTURE:
+\l
+\d tasks
+\d users
+
+TO SEE DATA INSIDE DATATABLE (sql query):
+SELECT * FROM tasks;
+SELECT * FROM users;
+
+
+```
+
+# SEEDERS (to populate your database with initial data)
+
+```
+create fake data for development using seeders (reflect model and migration table)
 ```

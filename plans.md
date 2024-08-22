@@ -207,3 +207,9 @@ SELECT * FROM users;
 
 
 ```
+
+# SEEDERS (to populate your database with initial data)
+
+```
+create fake data for development using seeders (reflect model and migration table)
+```

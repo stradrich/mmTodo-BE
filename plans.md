@@ -72,6 +72,10 @@ php artisan make:migration create_categories_table # Create categories table, on
 php artisan make:migration create_user_task_table  # For many-to-many relationships between users and tasks
 
 php artisan make:migration create_users_table # ???
+
+// migrate specific table example
+php artisan migrate --path=/database/migrations/2024_08_22_020134_create_users_table.php
+
 ```
 
 # CREATE MODELS
@@ -212,4 +216,13 @@ SELECT * FROM users;
 
 ```
 create fake data for development using seeders (reflect model and migration table)
+
+// run spefic seeder
+php artisan db:seed --class=UsersTableSeeder
+php artisan db:seed --class=TaskTableSeeder
+php artisan db:seed --class=CategoriesTableSeeder
+
+// run all seeders
+php artisan db:seed
+
 ```

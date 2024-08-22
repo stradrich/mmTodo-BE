@@ -194,7 +194,7 @@ WHERE datname = 'todoApp-BE'
 
 
 ### TERMINAL PEEK SUPABASE ###
-psql "host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres user=postgres.acvjeoqaldhqpmndncjy password=krupaBergonzikoD9124* sslmode=disable"
+psql "host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres user=postgres.acvjeoqaldhqpmndncjy password=xxx* sslmode=disable"
 
 TO SEE DATA STRUCTURE:
 \l

@@ -226,3 +226,53 @@ php artisan db:seed --class=CategoriesTableSeeder
 php artisan db:seed
 
 ```
+
+# Controller Implementation (interact with model, set up CRUD operation)
+
+```
+php artisan make:controller TaskController --resource
+
+
+### Define Routes @ routes/web.php if you build laravel FS, if it's react you do routes/api.php ###
+
+Go to api.php: 
+
+use App\Http\Controllers\TaskController;
+// use prefix for simple app, use middleware for more control, security and consistency i.e authentication
+Route::prefix('tasks')->group(function () {
+    Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+    Route::post('/', [TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/{task}', [TaskController::class, 'show'])->name('tasks.show');
+    Route::put('/{task}', [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+});
+
+```
+
+# TESTING (unite test or POSTMAN)
+
+```
+Unit Testing: Automate route and controller testing using Laravel’s built-in testing tools.
+
+Manual Testing: Use tools like Postman or cURL to interact with your API manually and verify responses.
+
+UNIT TESTING ROUTES
+php artisan make:test TaskTest
+
+after created, go to tests/Feature/TaskTest.php (define what you need)
+
+once finished, run php artisan test
+
+for specific test, i.e run php artisan test --filter test_can_retrieve_all_tasks
+
+
+NOTE: To clear confusion the PREFIX "tasks".When you use  Route::get('/', [TaskController::class, 'index'])->name('tasks.index');, 
+it means '/tasks'
+
+in the same way
+Route::get('/{task}', [TaskController::class, 'show'])->name('tasks.show');,
+it means '/tasks/{task}
+
+```
+
+

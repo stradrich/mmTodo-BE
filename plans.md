@@ -333,6 +333,10 @@ postgres=> SELECT * FROM tasks;
 
 postgres=> 
 
+
+TEST CRUD:
+php artisan test --filter test_can_retrieve_all_tasks
+php artisan test --filter test_can_create_task
 ```
 
 

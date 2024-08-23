@@ -273,6 +273,66 @@ in the same way
 Route::get('/{task}', [TaskController::class, 'show'])->name('tasks.show');,
 it means '/tasks/{task}
 
+php artisan migrate:fresh
+php artisan db:seed (or php artisan db:seed --class=TaskTableSeeder)
+php artisan tinker
+>>> App\Models\Task::all();
+
+psql "host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres user=postgres.acvjeoqaldhqpmndncjy password=xxx* sslmode=disable"
+
+SELECT * FROM tasks;
+
+you should expect these:
+aldrich@MMIntern2:~/mmTodoFs/mmtodobe$ php artisan tinker
+PHP Warning:  PHP Startup: Unable to load dynamic library 'mysqli' (tried: /usr/lib/php/20220829/mysqli (/usr/lib/php/20220829/mysqli: cannot open shared object file: No such file or directory), /usr/lib/php/20220829/mysqli.so (/usr/lib/php/20220829/mysqli.so: undefined symbol: mysqlnd_global_stats)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library '/path/to/extension/mysqli.so' (tried: /path/to/extension/mysqli.so (/path/to/extension/mysqli.so: cannot open shared object file: No such file or directory), /usr/lib/php/20220829///path/to/extension/mysqli.so.so (/usr/lib/php/20220829///path/to/extension/mysqli.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_mysql' (tried: /usr/lib/php/20220829/pdo_mysql (/usr/lib/php/20220829/pdo_mysql: cannot open shared object file: No such file or directory), /usr/lib/php/20220829/pdo_mysql.so (/usr/lib/php/20220829/pdo_mysql.so: undefined symbol: pdo_parse_params)) in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_pgsql' (tried: /usr/lib/php/20220829/pdo_pgsql (/usr/lib/php/20220829/pdo_pgsql: cannot open shared object file: No such file or directory), /usr/lib/php/20220829/pdo_pgsql.so (/usr/lib/php/20220829/pdo_pgsql.so: undefined symbol: pdo_parse_params)) in Unknown on line 0
+PHP Warning:  Module "mbstring" is already loaded in Unknown on line 0
+PHP Warning:  Module "pgsql" is already loaded in Unknown on line 0
+Psy Shell v0.12.4 (PHP 8.2.22 — cli) by Justin Hileman
+> App\Models\Task::all();
+= Illuminate\Database\Eloquent\Collection {#5988
+    all: [
+      App\Models\Task {#5990
+        id: 1,
+        title: "test",
+        description: "test",
+        status: "incomplete",
+        due_date: "2024-08-24",
+        priority: "low",
+        created_at: "2024-08-23 08:39:06",
+        updated_at: "2024-08-23 08:39:06",
+      },
+      App\Models\Task {#5991
+        id: 2,
+        title: "test1",
+        description: "test1",
+        status: "incomplete",
+        due_date: "2024-08-25",
+        priority: "medium",
+        created_at: "2024-08-23 08:39:06",
+        updated_at: "2024-08-23 08:39:06",
+      },
+      App\Models\Task {#5992
+
+[14]+  Stopped                 php artisan tinker
+aldrich@MMIntern2:~/mmTodoFs/mmtodobe$ psql "host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres user=postgres.acvjeoqaldhqpmndncjy password=xxx* sslmode=disable"
+psql (14.13 (Ubuntu 14.13-0ubuntu0.22.04.1), server 15.6)
+WARNING: psql major version 14, server major version 15.
+         Some psql features might not work.
+Type "help" for help.
+
+postgres=> SELECT * FROM tasks;
+ id | title | description |   status   |  due_date  | priority |     created_at      |     updated_at      
+----+-------+-------------+------------+------------+----------+---------------------+---------------------
+  1 | test  | test        | incomplete | 2024-08-24 | low      | 2024-08-23 08:39:06 | 2024-08-23 08:39:06
+  2 | test1 | test1       | incomplete | 2024-08-25 | medium   | 2024-08-23 08:39:06 | 2024-08-23 08:39:06
+  3 | test2 | test2       | incomplete | 2024-08-26 | medium   | 2024-08-23 08:39:06 | 2024-08-23 08:39:06
+(3 rows)
+
+postgres=> 
+
 ```
 
 

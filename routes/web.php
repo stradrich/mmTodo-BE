@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// USE web.php only for blades (laravel FS), else go to api.php
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('tasks', TaskController::class);

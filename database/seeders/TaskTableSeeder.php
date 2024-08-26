@@ -17,21 +17,21 @@ class TaskTableSeeder extends Seeder
             'priority' => 'low',
         ]);
 
-        Task::create([
-            'title' => 'test1',
-            'description' => 'test1',
-            'status' => 'complete',
-            'due_date' => now()->addDays(2),
-            'priority' => 'medium',
-        ]);
+        // Task::create([
+        //     'title' => 'test1',
+        //     'description' => 'test1',
+        //     'status' => 'complete',
+        //     'due_date' => now()->addDays(2),
+        //     'priority' => 'medium',
+        // ]);
 
-        Task::create([
-            'title' => 'test2',
-            'description' => 'test2',
-            'status' => 'incomplete',
-            'due_date' => now()->addDays(3),
-            'priority' => 'high',
-        ]);
+        // Task::create([
+        //     'title' => 'test2',
+        //     'description' => 'test2',
+        //     'status' => 'incomplete',
+        //     'due_date' => now()->addDays(3),
+        //     'priority' => 'high',
+        // ]);
     }
 }
 

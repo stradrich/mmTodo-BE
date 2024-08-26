@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class TaskController extends Controller
 {
     // Retrieve all tasks
@@ -47,10 +48,20 @@ class TaskController extends Controller
     }
 
     // Show (View a specific task):
-    public function show(Task $task)
+    // public function show(Task $task)
+    // {
+    //     return view('tasks.show', compact('task'));
+    // }
+    public function show($id)
     {
-        return view('tasks.show', compact('task'));
+        try {
+            $task = Task::findOrFail($id);
+            return response()->json($task);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
     }
+
 
     // Edit (Show form to edit an existing task):
     public function edit(Task $task)
@@ -59,8 +70,17 @@ class TaskController extends Controller
     }
 
     // Update (Save the edited task):
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
+        $task = Task::find($id);
+
+        Log::info('Before Update:', $task->toArray());
+        // dump($task);
+
+        if (!$task) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+        
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable|string',
@@ -69,9 +89,18 @@ class TaskController extends Controller
             'priority' => 'nullable|in:low,medium,high',
         ]);
 
-        $task->update($request->all());
+        // $task->update($request->all());
+
+         // Use fill to update the task
+        $task->fill($request->only([
+            'title', 'description', 'status', 'due_date', 'priority'
+        ]))->save();
+
+        // dump($task);
 
         // return redirect()->route('tasks.index')->with('success','Task updated successfully.'); // laravel backend
+
+        Log::info('After Update:', $task->toArray());
 
         return response()->json([
             'message' => 'Task updated successfully',

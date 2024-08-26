@@ -335,8 +335,15 @@ postgres=>
 
 
 TEST CRUD:
-php artisan test --filter test_can_retrieve_all_tasks
+php artisan test --filter test_can_retrieve_all_tasks (don't forget to fun migration and seeder!)
+
 php artisan test --filter test_can_create_task
+
+php artisan test --filter test_can_update_task
 ```
 
-
+# CLEAR YOUR CACHE #
+php artisan migrate:reset
+php artisan migrate:fresh
+php artisan config:clear
+php artisan config:cache

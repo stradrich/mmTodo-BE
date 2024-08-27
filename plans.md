@@ -247,6 +247,12 @@ Route::prefix('tasks')->group(function () {
     Route::delete('/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 });
 
+
+php artisan route:clear
+php artisan route:list
+DELETE  | api/tasks                  | tasks.destroyAll  | App\Http\Controllers\TaskController@destroyAll
+
+
 ```
 
 # TESTING (unite test or POSTMAN)

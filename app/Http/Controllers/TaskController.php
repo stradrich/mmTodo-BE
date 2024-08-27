@@ -14,8 +14,6 @@ class TaskController extends Controller
     {
         $tasks = Task::all();
 
-        // return view('tasks.index', compact('tasks')); // laravel backend
-
         return response()->json(Task::all());
     }
 
@@ -38,8 +36,6 @@ class TaskController extends Controller
 
         $task = Task::create($request->all());
 
-        // return redirect()->route('tasks.index')->with('success','Task created successfully.'); // this is for laravel FS
-
         // react
         return response()->json([
             'message' => 'Task created successfully',
@@ -48,10 +44,6 @@ class TaskController extends Controller
     }
 
     // Show (View a specific task):
-    // public function show(Task $task)
-    // {
-    //     return view('tasks.show', compact('task'));
-    // }
     public function show($id)
     {
         try {
@@ -75,12 +67,11 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         Log::info('Before Update:', $task->toArray());
-        // dump($task);
 
         if (!$task) {
             return response()->json(['error' => 'Task not found'], 404);
         }
-        
+
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable|string',
@@ -96,10 +87,6 @@ class TaskController extends Controller
             'title', 'description', 'status', 'due_date', 'priority'
         ]))->save();
 
-        // dump($task);
-
-        // return redirect()->route('tasks.index')->with('success','Task updated successfully.'); // laravel backend
-
         Log::info('After Update:', $task->toArray());
 
         return response()->json([
@@ -113,10 +100,17 @@ class TaskController extends Controller
     {
         $task->delete();
 
-        // return redirect()->route('tasks.index')->with('success','Task deleted successfully.'); // laravel backend
-
         return response()->json([
             'message' => 'Task deleted successfully',
+        ]);
+    }
+
+    // Destroy (Delete all tasks)
+    public function destroyAll() {
+        Task::truncate();
+
+        return response()->json([
+            'message' => 'All tasks deleted successfully'
         ]);
     }
 }

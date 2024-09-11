@@ -12,9 +12,11 @@ class TaskController extends Controller
     // Retrieve all tasks
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::all()->sortByDesc('created_at')->values();
 
-        return response()->json(Task::all());
+        // $tasks = Task::all();
+
+        return response()->json($tasks);
     }
 
     // Create (Show form to create a new task):
